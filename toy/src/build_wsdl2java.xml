@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<!DOCTYPE project [
+        <!ENTITY properties SYSTEM "file:../../xmls/properties.xml">
+        <!ENTITY paths  SYSTEM "file:../../xmls/path_refs.xml">
+        <!ENTITY taskdefs SYSTEM "file:../../xmls/taskdefs.xml">
+        <!ENTITY taskdefs_post_compile SYSTEM "file:../../xmls/taskdefs_post_compile.xml">
+        <!ENTITY targets SYSTEM "file:../../xmls/targets.xml">
+]>
+
+<!-- ===================================================================
+<description>
+   Test/Sample Component file for Axis
+
+Notes:
+   This is a build file for use with the Jakarta Ant build tool.
+
+Prerequisites:
+
+   jakarta-ant from http://jakarta.apache.org
+
+Build Instructions:
+   To compile
+        ant compile
+   To execute
+        ant run
+
+Author:
+  Matt Seibert mseibert@us.ibm.com
+
+Copyright:
+  Copyright (c) 2002-2003 Apache Software Foundation.
+</description>
+==================================================================== -->
+
+<project default="wsdl2java">
+<property name="prjdir" location="D:/xclick/xclick_app/xclick_kaia/xclick_kaia_webservice" />
+<target name="clean"/>
+
+	
+<path id="axis.class.path">
+	<fileset dir="${prjdir}/WebContent/WEB-INF/lib">
+		<include name="**/*.jar"/>
+	</fileset>
+</path>
+
+<target name="wsdl2java">
+    <java classname="org.apache.axis.wsdl.WSDL2Java" fork="yes" dir="${prjdir}/src">
+      <classpath refid="axis.class.path"/>
+  		<arg line="-s D:/xclick/xclick_app/xclick_kaia/xclick_kaia_webservice/src/Test.wsdl -d Application -o D:/xclick/xclick_app/xclick_kaia/xclick_kaia_webservice/src/wsdd "/>
+    </java>
+</target>	
+</project>
